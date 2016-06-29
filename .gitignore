@@ -23,5 +23,5 @@ website/node_modules
 *.iml
 *.test
 *.iml
-
+provider-variables.tf
 website/vendor
