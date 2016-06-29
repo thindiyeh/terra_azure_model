@@ -22,3 +22,10 @@ module "network_security_group" {
     resource_group_name = "${module.resource_group.rg_name}"
     network_security_group_count = "${var.network_security_group_count}"
 }
+
+module "network_security_rule" {
+    source = "./network_security_rule"
+    network_security_rule_parameters = "${var.network_security_rule_parameters}"
+    resource_group_name = "${module.resource_group.rg_name}"
+    network_security_rule_count = "${var.network_security_rule_count}"
+}
