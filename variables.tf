@@ -21,3 +21,14 @@ variable "subnet_name" {
 variable "subnet_address_prefix" {
     default = "10.0.1.0/24"
 }
+
+variable "network_security_group_count" {
+    default = 2
+}
+
+variable "network_security_group_name" {
+    default = {
+        "1" = "SSH-Only"
+        "2" = "RDP-Only"
+    }
+}

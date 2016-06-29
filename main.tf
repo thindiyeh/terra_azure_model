@@ -14,3 +14,11 @@ module "virtual_network" {
     subnet_name = "${var.subnet_name}"
     subnet_address_prefix = "${var.subnet_address_prefix}"
 }
+
+module "network_security_group" {
+    source = "./network_security_group"
+    network_security_group_name = "${var.network_security_group_name}"
+    network_security_group_location = "${module.resource_group.rg_location}"
+    resource_group_name = "${module.resource_group.rg_name}"
+    network_security_group_count = "${var.network_security_group_count}"
+}
