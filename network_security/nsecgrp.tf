@@ -1,3 +1,16 @@
+#resource "null_resource" "waited_on" {
+#    provisioner "local-exec" {
+#        command = "echo 'Waited for ${wait_on} to complete'"
+#    }
+#}
+
+resource "azurerm_network_security_group" "nsecgrp" {
+    name = "${lookup (var.network_security_group_name, count.index + 1)}"
+    location = "${var.network_security_group_location}"
+    resource_group_name = "${var.resource_group_name}"
+    count = "${var.network_security_group_count}"
+}
+
 resource "azurerm_network_security_rule" "nsecrule" {
     name = "${lookup (var.network_security_rule_parameters, format( "%d-name", count.index + 1))}"
     priority = "${lookup (var.network_security_rule_parameters, format( "%d-priority", count.index + 1))}"
@@ -11,5 +24,6 @@ resource "azurerm_network_security_rule" "nsecrule" {
     resource_group_name = "${var.resource_group_name}"
     network_security_group_name = "${lookup (var.network_security_rule_parameters, format( "%d-network_security_group_name", count.index + 1))}"
     count = "${var.network_security_rule_count}"
-}
 
+    depends_on = ["azurerm_network_security_group.nsecgrp"]
+}

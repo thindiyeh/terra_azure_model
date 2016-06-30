@@ -10,22 +10,26 @@ module "virtual_network" {
     virtual_network_address_space = "${var.virtual_network_address_space}"
     virtual_network_location = "${module.resource_group.rg_location}"
     resource_group_name = "${module.resource_group.rg_name}"
-
-    subnet_name = "${var.subnet_name}"
-    subnet_address_prefix = "${var.subnet_address_prefix}"
+    wait_on = "${module.resource_group.rg_name}"
 }
 
-module "network_security_group" {
-    source = "./network_security_group"
+module "subnet" {
+    source = "./subnet"
+    subnet_name = "${var.subnet_name}"
+    subnet_address_prefix = "${var.subnet_address_prefix}"
+    resource_group_name = "${module.resource_group.rg_name}"
+    virtual_network_name = "${module.virtual_network.vn_name}"
+    wait_on = "${module.virtual_network.vn_name}"
+}
+
+module "network_security" {
+    source = "./network_security"
     network_security_group_name = "${var.network_security_group_name}"
     network_security_group_location = "${module.resource_group.rg_location}"
     resource_group_name = "${module.resource_group.rg_name}"
     network_security_group_count = "${var.network_security_group_count}"
+    network_security_rule_parameters = "${var.network_security_rule_parameters}"
+    network_security_rule_count = "${var.network_security_rule_count}"    
+    wait_on = "${module.resource_group.rg_name}"
 }
 
-module "network_security_rule" {
-    source = "./network_security_rule"
-    network_security_rule_parameters = "${var.network_security_rule_parameters}"
-    resource_group_name = "${module.resource_group.rg_name}"
-    network_security_rule_count = "${var.network_security_rule_count}"
-}
