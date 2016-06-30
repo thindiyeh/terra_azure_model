@@ -33,3 +33,10 @@ module "network_security" {
     wait_on = "${module.resource_group.rg_name}"
 }
 
+module "storage_account" {
+    source = "./storage_account"
+    storage_account_parameters = "${var.storage_account_parameters}"
+    resource_group_name = "${module.resource_group.rg_name}"
+    storage_account_count = "${var.storage_account_count}"
+    wait_on = "${module.resource_group.rg_name}"
+}

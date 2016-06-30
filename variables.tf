@@ -62,3 +62,19 @@ variable "network_security_rule_parameters" {
         "2-network_security_group_name" = "RDP-Only"
     }
 }
+
+variable "storage_account_count" {
+    default = 2
+}
+
+variable "storage_account_parameters" {
+    default = {
+        "1-name" = "imagestoracct"
+        "1-account_type" = "Standard_LRS"
+        "1-location" = "EAST US2"
+
+        "2-name" = "imagestoracct2"
+        "2-account_type" = "Standard_LRS"
+        "2-location" = "EAST US2"
+    }
+}
