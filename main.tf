@@ -40,3 +40,11 @@ module "storage_account" {
     storage_account_count = "${var.storage_account_count}"
     wait_on = "${module.resource_group.rg_name}"
 }
+
+module "storage_container" {
+    source = "./storage_container"
+    storage_container_parameters = "${var.storage_container_parameters}"
+    resource_group_name = "${module.resource_group.rg_name}"
+    storage_container_count = "${var.storage_container_count}"
+    wait_on = "${module.resource_group.rg_name}"
+}

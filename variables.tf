@@ -78,3 +78,20 @@ variable "storage_account_parameters" {
         "2-location" = "EAST US2"
     }
 }
+
+variable "storage_container_count" {
+    default = 1
+}
+
+variable "storage_container_parameters" {
+    default = {
+        "1-name" = "vhds"
+        "1-storage_account_name" = "imagestoracct"
+        "1-container_access_type" = "private"
+
+        "2-name" = "imagestoracct2"
+        "2-account_type" = "Standard_LRS"
+        "2-location" = "EAST US2"
+    }
+}
+
